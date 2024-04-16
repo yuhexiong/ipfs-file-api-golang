@@ -1,6 +1,7 @@
 package route
 
 import (
+	"ipfs-file-api/pkg/server"
 	"net/http"
 
 	"github.com/gin-contrib/cors"
@@ -28,6 +29,8 @@ func Init() {
 			api.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 		}
 	}
+	srv := server.NewServer(ginEngine)
+	srv.Start()
 }
 
 func corsMiddleware() gin.HandlerFunc {

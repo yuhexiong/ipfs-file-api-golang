@@ -6,6 +6,7 @@ import (
 )
 
 var (
+	ApiPort          int
 	PostgresHost     string
 	PostgresPort     int
 	PostgresUser     string
@@ -15,6 +16,9 @@ var (
 
 func LoadConfig() {
 	var err error
+	if ApiPort, err = strconv.Atoi(os.Getenv("API_PORT")); err != nil {
+		panic(err)
+	}
 	PostgresHost = os.Getenv("POSTGRES_HOST")
 	if PostgresPort, err = strconv.Atoi(os.Getenv("POSTGRES_PORT")); err != nil {
 		panic(err)
