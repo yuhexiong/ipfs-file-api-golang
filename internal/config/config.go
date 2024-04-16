@@ -12,6 +12,7 @@ var (
 	PostgresUser     string
 	PostgresPassword string
 	PostgresDataBase string
+	IPFSHost         string
 )
 
 func LoadConfig() {
@@ -26,4 +27,6 @@ func LoadConfig() {
 	PostgresUser = os.Getenv("POSTGRES_USER")
 	PostgresPassword = os.Getenv("POSTGRES_PASSWORD")
 	PostgresDataBase = os.Getenv("POSTGRES_DB")
+
+	IPFSHost = os.Getenv("IPFS_HOST")
 }
