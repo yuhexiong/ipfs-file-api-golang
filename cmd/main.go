@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"ipfs-file-api/internal/config"
+	"ipfs-file-api/pkg/graceful"
 	"ipfs-file-api/pkg/logger"
 
 	"github.com/urfave/cli/v2"
@@ -22,6 +23,8 @@ func main() {
 			return nil
 		},
 		Action: func(c *cli.Context) error {
+			manager := graceful.GetManager()
+			<-manager.Done()
 			return nil
 		},
 	}
