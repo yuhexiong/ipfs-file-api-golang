@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"ipfs-file-api/internal/config"
+	fileMigration "ipfs-file-api/internal/file/migration"
 	"ipfs-file-api/internal/route"
 	"ipfs-file-api/pkg/graceful"
 	"ipfs-file-api/pkg/logger"
@@ -21,6 +22,11 @@ func main() {
 		Compiled: time.Now(),
 		Before: func(ctx *cli.Context) error {
 			logger.SetupLogger(true)
+
+			if err := fileMigration.Init(ctx.Context); err != nil {
+				return err
+			}
+
 			return nil
 		},
 		Action: func(c *cli.Context) error {

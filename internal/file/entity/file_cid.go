@@ -1,0 +1,7 @@
+package entity
+
+type FileCID struct {
+	ID   uint    `json:"id" gorm:"primaryKey;auto_increment" binding:"-" example:"1"`                            // ID
+	Name string  `json:"name" gorm:"type:varchar(255);not null;" example:"meeting.txt"`                          // name
+	CID  *string `json:"cid" gorm:"type:varchar(255);" example:"QmWMgCrvNEoD6KnqFfnv4tz7X6soDJvioswNBjHt6XcEum"` // cid of ipfs
+}
