@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"ipfs-file-api/internal/config"
+	"ipfs-file-api/internal/route"
 	"ipfs-file-api/pkg/graceful"
 	"ipfs-file-api/pkg/logger"
 
@@ -24,6 +25,7 @@ func main() {
 		},
 		Action: func(c *cli.Context) error {
 			manager := graceful.GetManager()
+			route.Init()
 			<-manager.Done()
 			return nil
 		},
