@@ -17,18 +17,18 @@ var connMap sync.Map
 type Config struct {
 	Host     string
 	Port     int
-	Username string
+	User     string
 	Password string
-	DBName   string
+	DataBase string
 }
 
 // Get Data Source Name
 func (c *Config) DSN() string {
 	return fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%d sslmode=disable TimeZone=%s",
 		c.Host,
-		c.Username,
+		c.User,
 		c.Password,
-		c.DBName,
+		c.DataBase,
 		c.Port,
 		"Asia/Taipei",
 	)
