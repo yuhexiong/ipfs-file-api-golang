@@ -35,5 +35,7 @@ IPFS_HOST=ipfs:5001
 
 ## API
 
+### File CID
+
 - GET /api/file-cid/{id}: 取得檔案
 - POST /api/file-cid/{name}: 上傳檔案
