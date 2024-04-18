@@ -1,6 +1,9 @@
 package entity
 
-import "context"
+import (
+	"bytes"
+	"context"
+)
 
 type FileCID struct {
 	ID   uint    `json:"id" gorm:"primaryKey;auto_increment" binding:"-" example:"1"`                            // ID
@@ -9,8 +12,8 @@ type FileCID struct {
 }
 
 type FileCIDService interface {
-	GetFileCID(ctx context.Context) (*FileCID, error)
-	CreateFileCID(ctx context.Context, cid string) (*FileCID, error)
+	GetFileCID(ctx context.Context, id uint) (*[]byte, error)
+	CreateFileCID(ctx context.Context, buf *bytes.Buffer, name string) (*FileCID, error)
 }
 
 type FileCIDRepository interface {
