@@ -5,8 +5,8 @@ A backend server provides an API for uploading and downloading files to IPFS, an
 
 - Language: Go v1.21.4
 - Web FrameWork: Gin v1.9.1
-- PostgreSQL v15.1
-- ipfs v0.27.0
+- DataBase: PostgreSQL v15.1
+- File Server: ipfs v0.27.0
 
 ## Run
 
