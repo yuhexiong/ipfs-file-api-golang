@@ -28,13 +28,14 @@ func (h *FileCIDHandler) GetFileCID(ctx *gin.Context) {
 		return
 	}
 
-	result, err := h.fileCIDService.GetFileCID(ctx, dataUri.ID)
+	buf, err := h.fileCIDService.GetFileCID(ctx, dataUri.ID)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	ctx.JSON(http.StatusOK, result)
+	contentType := "application/octet-stream"
+	ctx.Data(http.StatusOK, contentType, *buf)
 }
 
 func (h *FileCIDHandler) CreateFileCID(ctx *gin.Context) {
@@ -46,7 +47,7 @@ func (h *FileCIDHandler) CreateFileCID(ctx *gin.Context) {
 		return
 	}
 
-	photo, _, err := ctx.Request.FormFile("photo")
+	photo, _, err := ctx.Request.FormFile("file")
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, err.Error())
 		return

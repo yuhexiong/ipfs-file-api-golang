@@ -4,6 +4,8 @@ import (
 	"ipfs-file-api/pkg/server"
 	"net/http"
 
+	fileRoute "ipfs-file-api/internal/file/controller/http/route"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
@@ -24,6 +26,9 @@ func Init() {
 			ctx.AbortWithStatus(http.StatusOK)
 			ctx.String(http.StatusOK, "ok")
 		})
+
+		fileRouter := fileRoute.InitializeRouter()
+		fileRouter.RouterGroup(api.Group(""))
 
 		if mode := gin.Mode(); mode == gin.DebugMode {
 			api.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))

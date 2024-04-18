@@ -20,7 +20,7 @@ services:
     image: ipfs-file-api
     tty: true
     ports:
-      - 8888:${API_PORT}
+      - 8080:${API_PORT}
     volumes:
       - ./:/go/src/ipfs-file-api
     environment:
