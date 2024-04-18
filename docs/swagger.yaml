@@ -1,0 +1,75 @@
+definitions:
+  entity.FileCID:
+    properties:
+      cid:
+        description: cid of ipfs
+        example: QmWMgCrvNEoD6KnqFfnv4tz7X6soDJvioswNBjHt6XcEum
+        type: string
+      id:
+        description: ID
+        example: 1
+        type: integer
+      name:
+        description: name
+        example: meeting.txt
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /api/file-cid/{id}:
+    get:
+      description: 取得指定 File
+      parameters:
+      - description: FileCID ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/octet-stream
+      responses:
+        "200":
+          description: File
+          schema:
+            type: string
+        "400":
+          description: ""
+        "500":
+          description: ""
+      security:
+      - OAuth2Password: []
+      summary: 取得指定 File
+      tags:
+      - FileCID
+  /api/file-cid/{name}:
+    post:
+      description: 上傳 File
+      parameters:
+      - description: File Name
+        in: path
+        name: name
+        required: true
+        type: string
+      - description: File
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/entity.FileCID'
+        "400":
+          description: ""
+        "500":
+          description: ""
+      security:
+      - OAuth2Password: []
+      summary: 上傳 File
+      tags:
+      - FileCID
+swagger: "2.0"

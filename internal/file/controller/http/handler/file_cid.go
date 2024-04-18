@@ -19,6 +19,16 @@ func NewFileCIDHandler(fileCIDService entity.FileCIDService) *FileCIDHandler {
 	}
 }
 
+// @Summary 取得指定 File
+// @Description 取得指定 File
+// @Tags FileCID
+// @Produce application/octet-stream
+// @Security OAuth2Password
+// @Param id path integer true "FileCID ID"
+// @Success 200 {string} binary "File"
+// @Failure 400 ""
+// @Failure 500 ""
+// @Router /api/file-cid/{id} [get]
 func (h *FileCIDHandler) GetFileCID(ctx *gin.Context) {
 	var dataUri struct {
 		ID uint `uri:"id" binding:"required"`
@@ -38,6 +48,17 @@ func (h *FileCIDHandler) GetFileCID(ctx *gin.Context) {
 	ctx.Data(http.StatusOK, contentType, *buf)
 }
 
+// @Summary 上傳 File
+// @Description 上傳 File
+// @Tags FileCID
+// @Produce json
+// @Security OAuth2Password
+// @Param name path string true "File Name"
+// @Param file formData file true "File"
+// @Success 201 {object} entity.FileCID
+// @Failure 400 ""
+// @Failure 500 ""
+// @Router /api/file-cid/{name} [post]
 func (h *FileCIDHandler) CreateFileCID(ctx *gin.Context) {
 	var dataUri struct {
 		Name string `uri:"name" binding:"required"`
@@ -47,15 +68,15 @@ func (h *FileCIDHandler) CreateFileCID(ctx *gin.Context) {
 		return
 	}
 
-	photo, _, err := ctx.Request.FormFile("file")
+	file, _, err := ctx.Request.FormFile("file")
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, err.Error())
 		return
 	}
-	defer photo.Close()
+	defer file.Close()
 
 	buf := bytes.NewBuffer(nil)
-	if _, err := io.Copy(buf, photo); err != nil {
+	if _, err := io.Copy(buf, file); err != nil {
 		ctx.JSON(http.StatusInternalServerError, err.Error())
 		return
 	}

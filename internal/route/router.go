@@ -4,6 +4,7 @@ import (
 	"ipfs-file-api/pkg/server"
 	"net/http"
 
+	_ "ipfs-file-api/docs"
 	fileRoute "ipfs-file-api/internal/file/controller/http/route"
 
 	"github.com/gin-contrib/cors"
@@ -30,9 +31,7 @@ func Init() {
 		fileRouter := fileRoute.InitializeRouter()
 		fileRouter.RouterGroup(api.Group(""))
 
-		if mode := gin.Mode(); mode == gin.DebugMode {
-			api.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-		}
+		api.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	}
 	srv := server.NewServer(ginEngine)
 	srv.Start()

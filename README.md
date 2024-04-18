@@ -1,5 +1,5 @@
 # IPFS File API
-A backend server provides an API for uploading and downloading files to IPFS, and stores the data in a PostgreSQL database.
+A backend server provides an API for uploading and downloading files to IPFS, and stores file CID in a PostgreSQL database.
 
 ## Overview
 
@@ -15,6 +15,21 @@ A backend server provides an API for uploading and downloading files to IPFS, an
 go get -u && go mod tidy -v
 ```
 
+### Dependency Injection
+
+```
+wire ./...
+```
+
+### Generate Swagger
+
+```
+swag init -g cmd/main.go
+
+# swagger run at: 
+# http://localhost:${API_PORT}/api/swagger/index.html
+```
+
 
 ### Run
 ```
@@ -24,7 +39,7 @@ go run cmd/main.go
 ## ENV
 copy .env.default and rename as .env
 ```
-API_PORT=8080
+API_PORT=9090
 POSTGRES_HOST=
 POSTGRES_PORT=5432
 POSTGRES_USER=root
