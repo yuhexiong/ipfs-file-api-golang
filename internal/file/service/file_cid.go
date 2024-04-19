@@ -5,7 +5,7 @@ import (
 	"context"
 	"ipfs-file-api/internal/file/entity"
 	"ipfs-file-api/pkg/ipfs"
-	"ipfs-file-api/pkg/tool"
+	"ipfs-file-api/pkg/tools"
 )
 
 type fileCIDService struct {
@@ -28,7 +28,7 @@ func (s *fileCIDService) GetFileCID(ctx context.Context, id uint) (*[]byte, erro
 		return nil, err
 	}
 
-	return tool.GetPointer(buf), nil
+	return tools.GetPointer(buf), nil
 }
 
 func (s *fileCIDService) CreateFileCID(ctx context.Context, buf *bytes.Buffer, name string) (*entity.FileCID, error) {
@@ -37,5 +37,5 @@ func (s *fileCIDService) CreateFileCID(ctx context.Context, buf *bytes.Buffer, n
 		return nil, err
 	}
 
-	return s.fileCIDRep.Create(ctx, entity.FileCID{Name: name, CID: tool.GetPointer(cid)})
+	return s.fileCIDRep.Create(ctx, entity.FileCID{Name: name, CID: tools.GetPointer(cid)})
 }
