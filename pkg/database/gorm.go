@@ -44,7 +44,7 @@ func (c *Config) Connect() (*gorm.DB, error) {
 	})
 }
 
-// GetDB GetDB
+// GetDB
 func GetDB(c *Config) *gorm.DB {
 	if db, ok := connMap.Load(c); ok {
 		return db.(*gorm.DB)
